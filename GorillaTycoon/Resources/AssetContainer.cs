@@ -8,6 +8,7 @@ public class AssetContainer
     public static AssetContainer Ins;
     
     public GameObject BananaFarmerDesk;
+    public GameObject BananaObj;
 
     public void Start()
     {

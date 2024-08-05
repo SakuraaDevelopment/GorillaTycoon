@@ -49,9 +49,9 @@ namespace GorillaTycoon
 		private void UpdateTesterButtons()
 		{
 			if (Keyboard.current.digit6Key.wasPressedThisFrame) BananaFarmComputer.Ins.OnLeftArrowPress();
-			if (Keyboard.current.digit9Key.wasPressedThisFrame) BananaFarmComputer.Ins.OnDownArrowPress();
+			if (Keyboard.current.digit7Key.wasPressedThisFrame) BananaFarmComputer.Ins.OnDownArrowPress();
 			if (Keyboard.current.digit8Key.wasPressedThisFrame) BananaFarmComputer.Ins.OnSelectPress();
-			if (Keyboard.current.digit7Key.wasPressedThisFrame) BananaFarmComputer.Ins.OnUpArrowPress();
+			if (Keyboard.current.digit9Key.wasPressedThisFrame) BananaFarmComputer.Ins.OnUpArrowPress();
 			if (Keyboard.current.digit0Key.wasPressedThisFrame) BananaFarmComputer.Ins.OnRightArrowPress();
 		}
 

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GorillaTycoon.DataManagement;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = System.Random;
+
 // ReSharper disable Unity.PerformanceCriticalCodeNullComparison
 // ReSharper disable Unity.PerformanceCriticalCodeInvocation
 
@@ -10,41 +13,47 @@ namespace GorillaTycoon.BananaFarm;
 
 public class Banana : MonoBehaviour
 {
+    public float gravityScale = 0.01f;
+    
     public bool grabbed;
     public int value = 5;
     
     private Transform _leftHand;
     private Transform _rightHand;
-    private BoxCollider _boxCollider;
+    private MeshCollider _collider;
     private Rigidbody _rb;
+    private float _destructionDelay;
     
     private bool _grabbedWithRightHand;
     
     public void Start()
     {
         StartCoroutine(DelayDestroyBanana());
-        _boxCollider = gameObject.AddComponent<BoxCollider>();
-        _boxCollider.enabled = true;
-        _boxCollider.size = new Vector3(0.2f, 0.2f, 0.2f);
+        _collider = gameObject.GetComponent<MeshCollider>();
+        _collider.enabled = true;
+        // _collider.size = new Vector3(0.2f, 0.2f, 0.2f);
         gameObject.SetLayer(UnityLayer.GorillaBodyCollider);
         _rb = gameObject.AddComponent<Rigidbody>();
-        _rb.useGravity = true;
+        _rb.useGravity = false;
         
         gameObject.GetComponent<Renderer>().material.shader = Shader.Find("GorillaTag/" + "UberShader");
-        transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        transform.localScale *= 2.5f;
     }
 
     private void FixedUpdate()
     {
+        Vector3 customGravity = Physics.gravity * gravityScale;
+        _rb.AddForce(customGravity, ForceMode.Acceleration);
+        float pickupDistance = DataContainer.Ins.Collection * 0.5f;
         _leftHand = Plugin.Ins.myRig.leftIndex.fingerBone3;
         _rightHand = Plugin.Ins.myRig.rightIndex.fingerBone3;
-        if (Vector3.Distance(_rightHand.position, transform.position) <= 0.5f && InputManager.Ins.rightGrip)
+        if (Vector3.Distance(_rightHand.position, transform.position) <= pickupDistance && InputManager.Ins.rightGrip)
         {
             grabbed = true;
             _grabbedWithRightHand = true;
             
         }
-        else if (Vector3.Distance(_leftHand.position, transform.position) <= 0.5f && InputManager.Ins.leftGrip)
+        else if (Vector3.Distance(_leftHand.position, transform.position) <= pickupDistance && InputManager.Ins.leftGrip)
         {
             grabbed = true;
             _grabbedWithRightHand = false;
@@ -62,7 +71,7 @@ public class Banana : MonoBehaviour
     private void Update()
     {
         _rb.useGravity = !grabbed;
-        _boxCollider.enabled = !grabbed;
+        _collider.enabled = !grabbed;
 
         if (grabbed)
         {
@@ -76,12 +85,14 @@ public class Banana : MonoBehaviour
 
     private IEnumerator DelayDestroyBanana()
     {
-        yield return new WaitForSeconds(90f);
-        if (!grabbed && 
-            Vector3.Distance(transform.position, _rightHand.position) > 5 && 
+        yield return new WaitForSeconds(90);
+        if (!grabbed &&
+            Vector3.Distance(transform.position, _rightHand.position) > 5 &&
             Vector3.Distance(transform.position, _leftHand.position) > 5 &&
             !BananaBucket.Ins.bananaBucketList.Contains(this))
+        {
             Destroy(gameObject);
+        }
         else
         {
             StartCoroutine(DelayDestroyBanana());

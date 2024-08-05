@@ -29,5 +29,6 @@ public class AssetImporter
     {
         AssetContainer ac = AssetContainer.Ins;
         ac.BananaFarmerDesk = _ab.LoadAsset<GameObject>("BananaFarmerDesk");
+        ac.BananaObj = _ab.LoadAsset<GameObject>("banana");
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using GorillaTycoon.DataManagement;
@@ -138,8 +139,8 @@ public class BananaFarmComputer : MonoBehaviour
                     new ComputerLineInfo() { Text = $"TIER {ugLevel} -> TIER {ugLevel + 1}"},
                     new ComputerLineInfo() { Text = $""},
                     new ComputerLineInfo() { Text = $"CONFIRM?"},
-                    new ComputerLineInfo() { Text = $"NO", IsSelected = true},
-                    new ComputerLineInfo() { Text = $"YES", IsSelected = true}
+                    new ComputerLineInfo() { Text = $"NO", IsSelectable = true, IsSelected = (_selectedLine == 1)},
+                    new ComputerLineInfo() { Text = $"YES", IsSelectable = true, IsSelected = (_selectedLine == 2)}
                 }, _ugInfoText);
                 break;
         }
@@ -211,19 +212,7 @@ public class BananaFarmComputer : MonoBehaviour
             return;
         }
 
-        int maxAmount = 0;
-        switch (_currentPage)
-        {
-            case 1:
-                maxAmount = 1;
-                break;
-            case 2:
-                maxAmount = 3;
-                break;
-            case 4:
-                maxAmount = 2;
-                break;
-        }
+        
         int targetPage = _currentPage - 1;
         if (targetPage < 1)
             targetPage = 3;
@@ -238,6 +227,7 @@ public class BananaFarmComputer : MonoBehaviour
             return;
         }
         
+        
         int targetPage = _currentPage + 1;
         if (targetPage > 3)
             targetPage = 1;
@@ -249,29 +239,108 @@ public class BananaFarmComputer : MonoBehaviour
         switch (_currentPage)
         {
             case 1:
-            {
                 BananaBucket.Ins.SellBucket();
                 break;
-            }
             case 2:
                 _selectedUpgrade = _selectedLine;
                 SetComputerPage(4);
                 break;
+            case 4:
+                switch (_selectedLine)
+                {
+                    case 1:
+                        SetComputerPage(3);
+                        break;
+                    case 2:
+                        PurchaseUpgrade(_selectedUpgrade);
+                        break;
+                }
+                break;
         }
+    }
+
+    private void PurchaseUpgrade(int upgrade)
+    {
+        float cost = CalcUgCost(_selectedUpgrade, GetUpgradeLevel(_selectedUpgrade));
+        if (DataContainer.Ins.Coins < cost)
+        {
+            StartCoroutine(DisplayPurchaseMessage("INSIGNIFICANT FUNDS"));
+            return;
+        }
+
+        DataContainer.Ins.Coins -= cost;
+        
+        switch (upgrade)
+        {
+            case 1:
+                DataContainer.Ins.ValuableBananas += 1;
+                break;
+            case 2:
+                DataContainer.Ins.BananaCooldown += 1;
+                break;
+            case 3:
+                DataContainer.Ins.BananaDuration += 1;
+                break;
+            case 4:
+                DataContainer.Ins.Collection += 1;
+                break;
+        }
+        StartCoroutine(DisplayPurchaseMessage("SUCCESSFULLY PURCHASED"));
+    }
+
+    private IEnumerator DisplayPurchaseMessage(string text)
+    {
+        RenderText(new ComputerLineInfo[] 
+        {
+            new ComputerLineInfo() { Text = $"" },
+            new ComputerLineInfo() { Text = $""},
+            new ComputerLineInfo() { Text = $""},
+            new ComputerLineInfo() { Text = text}
+        }, _ugInfoText);
+        yield return new WaitForSeconds(2f);
+        SetComputerPage(2);
     }
 
     public void OnUpArrowPress()
     {
+        int maxAmount = 0;
+        switch (_currentPage)
+        {
+            case 1:
+                maxAmount = 1;
+                break;
+            case 2:
+                maxAmount = 4;
+                break;
+            case 4:
+                maxAmount = 2;
+                break;
+        }
+        
         int targetLine = _selectedLine - 1;
         if (targetLine < 1)
-            targetLine = 4;
+            targetLine = maxAmount;
         _selectedLine = targetLine;
     }
 
     public void OnDownArrowPress()
     {
+        int maxAmount = 0;
+        switch (_currentPage)
+        {
+            case 1:
+                maxAmount = 1;
+                break;
+            case 2:
+                maxAmount = 4;
+                break;
+            case 4:
+                maxAmount = 2;
+                break;
+        }
+        
         int targetLine = _selectedLine + 1;
-        if (targetLine > 4)
+        if (targetLine > maxAmount)
             targetLine = 1;
         _selectedLine = targetLine;
     }

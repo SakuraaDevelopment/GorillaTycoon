@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3760495356
+CRC: 2705685857
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b29e76c566ce401bcd27933cd824e055
+    Hash: 3c454b0a1cfbc7521466a0d4a9907ba8
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 7cad7f44d3fee7fa7ca0d741a1e3d7e0
+    Hash: 7006ffee2901a250c744ee4173b282cc
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -24,6 +24,8 @@ ClassTypes:
 - Class: 43
   Script: {instanceID: 0}
 - Class: 48
+  Script: {instanceID: 0}
+- Class: 64
   Script: {instanceID: 0}
 - Class: 65
   Script: {instanceID: 0}
@@ -77,6 +79,7 @@ Assets:
 - Assets/Textures/wood.png
 - Assets/Textures/gtagRip/f683a725-a0b9-4477-91bd-f14bc0684310.png
 - Assets/Materials/Wood2.mat
+- Assets/Export/banana.prefab
 - Assets/Textures/lightfur.png
 - Assets/Export/Fonts/gtag_font_pink SDF 1.asset
 - Assets/Textures/gtagRip/groundjustgrass.png

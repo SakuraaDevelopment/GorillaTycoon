@@ -1,7 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using GorillaTycoon.DataManagement;
+using GorillaTycoon.Resources;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 // ReSharper disable Unity.PerformanceCriticalCodeInvocation
 
@@ -10,13 +14,16 @@ namespace GorillaTycoon.BananaFarm;
 public class BananaSpawner : MonoBehaviour
 {
     public GameObject bananaPrefab;
+    public float cd;
+    
     public void Start()
     {
         GetComponent<Collider>().enabled = false;
-        transform.position = new Vector3(-52, 35, -62);
+        transform.position = new Vector3(-52, 50, -62);
         transform.localScale = new Vector3(49, 1, 47);
         
-        bananaPrefab = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        // bananaPrefab = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        bananaPrefab = AssetContainer.Ins.BananaObj;
         
         StartCoroutine(BananaSpawningLoop());
     }
@@ -26,8 +33,13 @@ public class BananaSpawner : MonoBehaviour
         while (true)
         {
             SpawnBanana();
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(cd);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        cd = (27f - (DataContainer.Ins.BananaCooldown * 3f));
     }
 
     private void SpawnBanana()

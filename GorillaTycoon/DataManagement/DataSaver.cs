@@ -43,6 +43,10 @@ public class DataSaver
             var json = File.ReadAllText(saveFilePath);
             var saveData = JsonConvert.DeserializeObject<DataContainer>(json);
             DataContainer.Ins.Coins = saveData.Coins;
+            DataContainer.Ins.BananaCooldown = saveData.BananaCooldown;
+            DataContainer.Ins.Collection = saveData.Collection;
+            DataContainer.Ins.ValuableBananas = saveData.ValuableBananas;
+            DataContainer.Ins.BananaDuration = saveData.BananaDuration;
         }
     }
 }
