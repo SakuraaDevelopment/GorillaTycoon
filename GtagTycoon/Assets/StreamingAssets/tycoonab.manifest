@@ -1,0 +1,109 @@
+ManifestFileVersion: 0
+CRC: 3760495356
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b29e76c566ce401bcd27933cd824e055
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7cad7f44d3fee7fa7ca0d741a1e3d7e0
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FaceInfo_Legacy
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FontAssetCreationSettings
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.KerningTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Character
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontFeatureTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontWeightPair
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.FaceInfo
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.Glyph
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphMetrics
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphRect
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/Export/Fonts/font.otf
+- Assets/Textures/gtagRip/260c53a0-252e-4e44-a657-3ccee2a4f1ce.png
+- Assets/Materials/whiteFluf.mat
+- Assets/Textures/gtagRip/darkerbrownpanel.png
+- Assets/Export/Fonts/Designer.otf
+- Assets/Textures/gtagRip/7f484b2a-23e9-4fcb-bfb4-9da97b923a65.png
+- Assets/Textures/Camo.png
+- Assets/Textures/wood.png
+- Assets/Textures/gtagRip/f683a725-a0b9-4477-91bd-f14bc0684310.png
+- Assets/Materials/Wood2.mat
+- Assets/Textures/lightfur.png
+- Assets/Export/Fonts/gtag_font_pink SDF 1.asset
+- Assets/Textures/gtagRip/groundjustgrass.png
+- Assets/Textures/gtagRip/bark.png
+- Assets/Materials/wall.mat
+- Assets/Export/Fonts/Designer SDF.asset
+- Assets/Textures/wood3.png
+- Assets/Textures/wood2.png
+- Assets/Textures/gtagRip/rockwall.png
+- Assets/Export/BananaFarmerDesk.prefab
+- Assets/Textures/gtc.png
+- Assets/Export/Fonts/Gotham Ultra SDF.asset
+- Assets/Textures/gtagRip/redpanel.png
+- Assets/Export/Fonts/Pixel Font.TTF
+- Assets/Export/Fonts/Gotham Ultra.ttf
+- Assets/Materials/planks.mat
+- Assets/Materials/black.mat
+- Assets/Export/Fonts/gtag_font.ttf
+- Assets/Export/Fonts/font SDF.asset
+- Assets/Textures/gtagRip/unnamed.png
+- Assets/Materials/Wood3.mat
+- Assets/Export/Fonts/gtag_font SDF.asset
+- Assets/Textures/CamoCC.png
+- Assets/Textures/gtagRip/60cd56f1-317f-4e38-9d7b-889ffd8bd6a9.png
+- Assets/Export/Sfx/purchased.mp3
+- Assets/Textures/LavaMonke.png
+- Assets/Textures/gtagRip/0ce796a8-2ab7-4a76-aa8e-b6317c1ef6aa.png
+- Assets/Export/Fonts/pixel Font SDF.asset
+- Assets/Materials/Wood.mat
+Dependencies: []
