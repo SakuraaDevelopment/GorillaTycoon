@@ -46,7 +46,7 @@ public class DataSaver
             DataContainer.Ins.BananaCooldown = saveData.BananaCooldown;
             DataContainer.Ins.Collection = saveData.Collection;
             DataContainer.Ins.ValuableBananas = saveData.ValuableBananas;
-            DataContainer.Ins.BananaDuration = saveData.BananaDuration;
+            DataContainer.Ins.Drone = saveData.Drone;
         }
     }
 }

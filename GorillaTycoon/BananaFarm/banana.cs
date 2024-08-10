@@ -38,6 +38,14 @@ public class Banana : MonoBehaviour
         
         gameObject.GetComponent<Renderer>().material.shader = Shader.Find("GorillaTag/" + "UberShader");
         transform.localScale *= 2.5f;
+        BananaSpawner.Ins.activeBananas.Add(this);
+        value = CalcValue();
+    }
+
+    private float CalcValue()
+    {
+        float value = (5 * (0.5 * DataContainer.Ins.ValuableBananas)) + 2.5;
+        return value;
     }
 
     private void FixedUpdate()
@@ -64,7 +72,12 @@ public class Banana : MonoBehaviour
 
             if ((_grabbedWithRightHand && !InputManager.Ins.rightGrip) ||
                 (!_grabbedWithRightHand && !InputManager.Ins.leftGrip))
+            {
                 grabbed = false;
+                Vector3 bucketPos = BananaBucket.Ins.transform.position;
+                if (Vector3.Distance(bucketPos, transform.position) <= 2)
+                    transform.position = bucketPos; // idk if this would look good
+            }
         }
     }
 
@@ -89,8 +102,9 @@ public class Banana : MonoBehaviour
         if (!grabbed &&
             Vector3.Distance(transform.position, _rightHand.position) > 5 &&
             Vector3.Distance(transform.position, _leftHand.position) > 5 &&
-            !BananaBucket.Ins.bananaBucketList.Contains(this))
+            !BananaBucket.Ins.BananaBucketList.Contains(this))
         {
+            BananaSpawner.Ins.activeBananas.Remove(this)
             Destroy(gameObject);
         }
         else

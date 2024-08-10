@@ -9,7 +9,7 @@ public class BananaBucket : MonoBehaviour
 {
     public static BananaBucket Ins;
     
-    public List<Banana> bananaBucketList = new List<Banana>();
+    public List<Banana> BananaBucketList = new List<Banana>();
     private void Start()
     {
         Ins = this;
@@ -20,12 +20,12 @@ public class BananaBucket : MonoBehaviour
     public void SellBucket()
     {
         float sellValue = 0;
-        foreach (Banana banana in bananaBucketList)
+        foreach (Banana banana in BananaBucketList)
         {
             sellValue += banana.value;
             Destroy(banana.gameObject);
         }
-        bananaBucketList.Clear();
+        BananaBucketList.Clear();
         DataContainer.Ins.Coins += sellValue;
     }
     
@@ -33,15 +33,15 @@ public class BananaBucket : MonoBehaviour
     {
         if (!collider.transform.TryGetComponent(out Banana bananaInBucket)) return;
         
-        if (!bananaBucketList.Contains(bananaInBucket))
-            bananaBucketList.Add(bananaInBucket);
+        if (!BananaBucketList.Contains(bananaInBucket))
+            BananaBucketList.Add(bananaInBucket);
     }
 
     private void OnTriggerExit(Collider collider)
     {
         if (collider.transform.TryGetComponent(out Banana bananaInBucket))
         {
-            bananaBucketList.Remove(bananaInBucket);
+            BananaBucketList.Remove(bananaInBucket);
         }
     }
 }

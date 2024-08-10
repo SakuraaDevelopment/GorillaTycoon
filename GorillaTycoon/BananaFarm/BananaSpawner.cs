@@ -13,11 +13,14 @@ namespace GorillaTycoon.BananaFarm;
 
 public class BananaSpawner : MonoBehaviour
 {
+    public static BananaSpawner Ins;
     public GameObject bananaPrefab;
     public float cd;
+    public List<Vector3> activeBananas = new List<Vector3>();
     
     public void Start()
     {
+        Ins = this;
         GetComponent<Collider>().enabled = false;
         transform.position = new Vector3(-52, 50, -62);
         transform.localScale = new Vector3(49, 1, 47);

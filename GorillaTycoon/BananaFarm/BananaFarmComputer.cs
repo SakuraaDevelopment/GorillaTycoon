@@ -101,7 +101,7 @@ public class BananaFarmComputer : MonoBehaviour
             case 1:
                 RenderText(new ComputerLineInfo[] 
                 {
-                    new ComputerLineInfo() { Text = $"BANANA'S DETECTED: {BananaBucket.Ins.bananaBucketList.Count}" },
+                    new ComputerLineInfo() { Text = $"BANANA'S DETECTED: {BananaBucket.Ins.BananaBucketList.Count}" },
                     new ComputerLineInfo() { Text = $"COINS: {DataContainer.Ins.Coins}" },
                     new ComputerLineInfo() { Text = "\n" },
                     new ComputerLineInfo() { Text = "SELL BANANAS", IsSelectable = true, IsSelected = true}
@@ -114,11 +114,11 @@ public class BananaFarmComputer : MonoBehaviour
                     new ComputerLineInfo() { Text = $"" },
                     new ComputerLineInfo() { Text = $"VALUABLE BANANAS: TIER {DataContainer.Ins.ValuableBananas}", 
                         IsSelectable = true, IsSelected = (_selectedLine == 1), HasLeftPad = true},
-                    new ComputerLineInfo() { Text = $"BANANA COOLDOWN: {DataContainer.Ins.BananaCooldown} SEC", 
+                    new ComputerLineInfo() { Text = $"BANANA COOLDOWN: TIER {DataContainer.Ins.BananaCooldown}", 
                         IsSelectable = true, IsSelected = (_selectedLine == 2), HasLeftPad = true},
-                    new ComputerLineInfo() { Text = $"BANANA DURATION: {DataContainer.Ins.BananaDuration} SEC", 
+                    new ComputerLineInfo() { Text = $"AUTO FARM DRONE: TIER {DataContainer.Ins.Drone}", 
                         IsSelectable = true, IsSelected = (_selectedLine == 3), HasLeftPad = true},
-                    new ComputerLineInfo() { Text = $"COLLECTION: {DataContainer.Ins.Collection} SEC", 
+                    new ComputerLineInfo() { Text = $"COLLECTION: TIER {DataContainer.Ins.Collection}", 
                         IsSelectable = true, IsSelected = (_selectedLine == 4), HasLeftPad = true}
                 }, _p2Text);
                 break;
@@ -130,6 +130,7 @@ public class BananaFarmComputer : MonoBehaviour
                 }, _p3Text);
                 break;
             case 4:
+                if (_displayMessage) return;
                 int ugLevel = GetUpgradeLevel(_selectedUpgrade);
                 RenderText(new ComputerLineInfo[] 
                 {
@@ -158,7 +159,7 @@ public class BananaFarmComputer : MonoBehaviour
                 ugName = "BANANA COOLDOWN";
                 break;
             case 3:
-                ugName = "BANANA DURATION";
+                ugName = "AUTO FARM DRONE";
                 break;
             case 4:
                 ugName = "COLLECTION";
@@ -179,7 +180,7 @@ public class BananaFarmComputer : MonoBehaviour
                 lvl = DataContainer.Ins.BananaCooldown;
                 break;
             case 3:
-                lvl = DataContainer.Ins.BananaDuration;
+                lvl = DataContainer.Ins.Drone;
                 break;
             case 4:
                 lvl = DataContainer.Ins.Collection;
@@ -195,9 +196,9 @@ public class BananaFarmComputer : MonoBehaviour
             case 1: // VALUABLE BANANAS
                 return (float)Math.Round(65 * Math.Pow(level, 2), 0);
             case 2: // BANANA COOLDOWN
-                return (float)Math.Round(15 * Math.Pow(level, 2), 0);
-            case 3: // BANANA DURATION
-                return (float)Math.Round(20 * Math.Pow(level, 2), 0);
+                return (float)Math.Round(15 * Math.Pow(level, 2), 4);
+            case 3: // AUTO FARM DRONE
+                return (float)(Math.Round(250 * Math.Pow(level, 3), 0) + 250);
             case 4: // COLLECTION
                 return (float)Math.Round(100 * Math.Pow(level, 2), 0);
         }
@@ -290,14 +291,16 @@ public class BananaFarmComputer : MonoBehaviour
 
     private IEnumerator DisplayPurchaseMessage(string text)
     {
+        _displayMessage = true;
         RenderText(new ComputerLineInfo[] 
         {
-            new ComputerLineInfo() { Text = $"" },
-            new ComputerLineInfo() { Text = $""},
-            new ComputerLineInfo() { Text = $""},
+            new ComputerLineInfo() { Text = $" " },
+            new ComputerLineInfo() { Text = $" "},
+            new ComputerLineInfo() { Text = $" "},
             new ComputerLineInfo() { Text = text}
         }, _ugInfoText);
         yield return new WaitForSeconds(2f);
+        _displayMessage = false;
         SetComputerPage(2);
     }
 
