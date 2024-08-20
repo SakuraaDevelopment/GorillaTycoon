@@ -16,7 +16,8 @@ public class Banana : MonoBehaviour
     public float gravityScale = 0.01f;
     
     public bool grabbed;
-    public int value = 5;
+    public bool magnified;
+    public float value = 5;
     
     private Transform _leftHand;
     private Transform _rightHand;
@@ -25,7 +26,7 @@ public class Banana : MonoBehaviour
     private float _destructionDelay;
     
     private bool _grabbedWithRightHand;
-    
+
     public void Start()
     {
         StartCoroutine(DelayDestroyBanana());
@@ -44,7 +45,7 @@ public class Banana : MonoBehaviour
 
     private float CalcValue()
     {
-        float value = (5 * (0.5 * DataContainer.Ins.ValuableBananas)) + 2.5;
+        float value = (float)((5 * (0.5 * DataContainer.Ins.ValuableBananas)) + 2.5);
         return value;
     }
 
@@ -102,9 +103,9 @@ public class Banana : MonoBehaviour
         if (!grabbed &&
             Vector3.Distance(transform.position, _rightHand.position) > 5 &&
             Vector3.Distance(transform.position, _leftHand.position) > 5 &&
-            !BananaBucket.Ins.BananaBucketList.Contains(this))
+            !BananaBucket.Ins.bananaBucketList.Contains(this))
         {
-            BananaSpawner.Ins.activeBananas.Remove(this)
+            BananaSpawner.Ins.activeBananas.Remove(this);
             Destroy(gameObject);
         }
         else

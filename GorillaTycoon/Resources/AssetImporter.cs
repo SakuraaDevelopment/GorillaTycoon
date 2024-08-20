@@ -13,6 +13,7 @@ public class AssetImporter
         Debug.Log("Imported asset bundle");
         ImportBananaFarmAssets();
         Debug.Log("Imported banana farm assets");
+        
     }
 
     private void RetrieveAssetBundle()
@@ -30,5 +31,6 @@ public class AssetImporter
         AssetContainer ac = AssetContainer.Ins;
         ac.BananaFarmerDesk = _ab.LoadAsset<GameObject>("BananaFarmerDesk");
         ac.BananaObj = _ab.LoadAsset<GameObject>("banana");
+        ac.DroneObj = _ab.LoadAsset<GameObject>("drone");
     }
 }

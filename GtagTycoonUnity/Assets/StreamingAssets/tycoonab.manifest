@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2705685857
+CRC: 3647636067
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3c454b0a1cfbc7521466a0d4a9907ba8
+    Hash: 2a266b464dc5fe5f5b35b789dd9977f4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 7006ffee2901a250c744ee4173b282cc
@@ -75,6 +75,7 @@ Assets:
 - Assets/Textures/gtagRip/darkerbrownpanel.png
 - Assets/Export/Fonts/Designer.otf
 - Assets/Textures/gtagRip/7f484b2a-23e9-4fcb-bfb4-9da97b923a65.png
+- Assets/Export/drone.prefab
 - Assets/Textures/Camo.png
 - Assets/Textures/wood.png
 - Assets/Textures/gtagRip/f683a725-a0b9-4477-91bd-f14bc0684310.png
@@ -102,6 +103,7 @@ Assets:
 - Assets/Textures/gtagRip/unnamed.png
 - Assets/Materials/Wood3.mat
 - Assets/Export/Fonts/gtag_font SDF.asset
+- Assets/Materials/droneMat.mat
 - Assets/Textures/CamoCC.png
 - Assets/Textures/gtagRip/60cd56f1-317f-4e38-9d7b-889ffd8bd6a9.png
 - Assets/Export/Sfx/purchased.mp3

@@ -9,6 +9,7 @@ public class AssetContainer
     
     public GameObject BananaFarmerDesk;
     public GameObject BananaObj;
+    public GameObject DroneObj;
 
     public void Start()
     {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using GorillaTycoon.DataManagement;
+using GorillaTycoon.Resources;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,10 +22,12 @@ public class BananaFarmComputer : MonoBehaviour
     private TMP_Text _p2Text;
     private TMP_Text _p3Text;
     private TMP_Text _ugInfoText;
+    private List<Drone> _droneList = new List<Drone>();
     
     private bool _confirmationChoice = false;
     private int _selectedLine;
     private int _selectedUpgrade;
+    private bool _displayMessage;
 
     private void Start()
     {
@@ -37,6 +40,20 @@ public class BananaFarmComputer : MonoBehaviour
     private void Update()
     {
         UpdatePages();
+        ValidateDrones();
+    }
+
+    private void ValidateDrones()
+    {
+        int droneAmount = 1; // todo: possible make it so you can buy more
+        if (_droneList.Count >= droneAmount)
+        {
+            return;
+        }
+        
+        GameObject droneObj = Instantiate(AssetContainer.Ins.DroneObj);
+        Drone droneComponent = droneObj.AddComponent<Drone>();
+        _droneList.Add(droneComponent);
     }
 
     private void DefinePages()
@@ -101,7 +118,7 @@ public class BananaFarmComputer : MonoBehaviour
             case 1:
                 RenderText(new ComputerLineInfo[] 
                 {
-                    new ComputerLineInfo() { Text = $"BANANA'S DETECTED: {BananaBucket.Ins.BananaBucketList.Count}" },
+                    new ComputerLineInfo() { Text = $"BANANA'S DETECTED: {BananaBucket.Ins.bananaBucketList.Count}" },
                     new ComputerLineInfo() { Text = $"COINS: {DataContainer.Ins.Coins}" },
                     new ComputerLineInfo() { Text = "\n" },
                     new ComputerLineInfo() { Text = "SELL BANANAS", IsSelectable = true, IsSelected = true}
@@ -280,7 +297,7 @@ public class BananaFarmComputer : MonoBehaviour
                 DataContainer.Ins.BananaCooldown += 1;
                 break;
             case 3:
-                DataContainer.Ins.BananaDuration += 1;
+                DataContainer.Ins.Drone += 1;
                 break;
             case 4:
                 DataContainer.Ins.Collection += 1;
