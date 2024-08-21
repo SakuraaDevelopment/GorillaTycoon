@@ -23,7 +23,6 @@ public class Banana : MonoBehaviour
     private Transform _rightHand;
     private MeshCollider _collider;
     private Rigidbody _rb;
-    private float _destructionDelay;
     
     private bool _grabbedWithRightHand;
 
@@ -51,6 +50,13 @@ public class Banana : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (transform.position.y <= -15)
+        {
+            var newPos = transform.position;
+            newPos = new Vector3(newPos.x, newPos.y + 40, newPos.z);
+            transform.position = newPos;
+        }
+            
         Vector3 customGravity = Physics.gravity * gravityScale;
         _rb.AddForce(customGravity, ForceMode.Acceleration);
         float pickupDistance = DataContainer.Ins.Collection * 0.5f;
@@ -58,12 +64,14 @@ public class Banana : MonoBehaviour
         _rightHand = Plugin.Ins.myRig.rightIndex.fingerBone3;
         if (Vector3.Distance(_rightHand.position, transform.position) <= pickupDistance && InputManager.Ins.rightGrip)
         {
+            if (magnified) return;
             grabbed = true;
             _grabbedWithRightHand = true;
             
         }
         else if (Vector3.Distance(_leftHand.position, transform.position) <= pickupDistance && InputManager.Ins.leftGrip)
         {
+            if (magnified) return;
             grabbed = true;
             _grabbedWithRightHand = false;
         }
@@ -74,6 +82,7 @@ public class Banana : MonoBehaviour
             if ((_grabbedWithRightHand && !InputManager.Ins.rightGrip) ||
                 (!_grabbedWithRightHand && !InputManager.Ins.leftGrip))
             {
+                if (magnified) return;
                 grabbed = false;
                 Vector3 bucketPos = BananaBucket.Ins.transform.position;
                 if (Vector3.Distance(bucketPos, transform.position) <= 2)
@@ -84,8 +93,8 @@ public class Banana : MonoBehaviour
 
     private void Update()
     {
-        _rb.useGravity = !grabbed;
-        _collider.enabled = !grabbed;
+        _rb.useGravity = (!grabbed && !magnified);
+        _collider.enabled = (!grabbed && !magnified);
 
         if (grabbed)
         {
@@ -100,7 +109,7 @@ public class Banana : MonoBehaviour
     private IEnumerator DelayDestroyBanana()
     {
         yield return new WaitForSeconds(90);
-        if (!grabbed &&
+        if (!magnified && !grabbed &&
             Vector3.Distance(transform.position, _rightHand.position) > 5 &&
             Vector3.Distance(transform.position, _leftHand.position) > 5 &&
             !BananaBucket.Ins.bananaBucketList.Contains(this))
