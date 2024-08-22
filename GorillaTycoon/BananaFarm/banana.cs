@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using GorillaTycoon.DataManagement;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Random = System.Random;
 
 // ReSharper disable Unity.PerformanceCriticalCodeNullComparison
 // ReSharper disable Unity.PerformanceCriticalCodeInvocation
@@ -13,8 +9,6 @@ namespace GorillaTycoon.BananaFarm;
 
 public class Banana : MonoBehaviour
 {
-    public float gravityScale = 0.01f;
-    
     public bool grabbed;
     public bool magnified;
     public float value = 5;
@@ -34,7 +28,7 @@ public class Banana : MonoBehaviour
         // _collider.size = new Vector3(0.2f, 0.2f, 0.2f);
         gameObject.SetLayer(UnityLayer.GorillaBodyCollider);
         _rb = gameObject.AddComponent<Rigidbody>();
-        _rb.useGravity = false;
+        _rb.useGravity = true;
         
         gameObject.GetComponent<Renderer>().material.shader = Shader.Find("GorillaTag/" + "UberShader");
         transform.localScale *= 2.5f;
@@ -56,9 +50,7 @@ public class Banana : MonoBehaviour
             newPos = new Vector3(newPos.x, newPos.y + 40, newPos.z);
             transform.position = newPos;
         }
-            
-        Vector3 customGravity = Physics.gravity * gravityScale;
-        _rb.AddForce(customGravity, ForceMode.Acceleration);
+        
         float pickupDistance = DataContainer.Ins.Collection * 0.5f;
         _leftHand = Plugin.Ins.myRig.leftIndex.fingerBone3;
         _rightHand = Plugin.Ins.myRig.rightIndex.fingerBone3;

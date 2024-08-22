@@ -35,6 +35,7 @@ public class Drone : MonoBehaviour
 
     private void Update()
     {
+        _droneSpeed = 3 + (DataContainer.Ins.Drone * 4);
         if (_returningHome)
             _timeSinceHome = 0;
         else _timeSinceHome += Time.deltaTime;
@@ -110,7 +111,8 @@ public class Drone : MonoBehaviour
     private Vector3 GetTargetPosition()
     {
         List<Banana> activeUntouchedBananas = BananaSpawner.Ins.activeBananas
-            .Where(bananaThing => !bananaThing.grabbed && !bananaThing.magnified).ToList();
+            .Where(bananaThing => !bananaThing.grabbed && !bananaThing.magnified &&
+                                  !BananaBucket.Ins.bananaBucketList.Contains(bananaThing)).ToList();
 
         if (activeUntouchedBananas.Count == 0 || _magnifiedBananas.Count >= _maxBananas)
         {

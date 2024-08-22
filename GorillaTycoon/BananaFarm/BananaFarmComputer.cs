@@ -45,7 +45,7 @@ public class BananaFarmComputer : MonoBehaviour
 
     private void ValidateDrones()
     {
-        int droneAmount = 1; // todo: possible make it so you can buy more
+        int droneAmount = (DataContainer.Ins.Drone == 0) ? 0 : 1; // todo: possible make it so you can buy more
         if (_droneList.Count >= droneAmount)
         {
             return;

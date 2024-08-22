@@ -50,7 +50,7 @@ public class BananaSpawner : MonoBehaviour
         Bounds bounds = GetComponent<Renderer>().bounds;
 
         float x = Random.Range(bounds.min.x, bounds.max.x);
-        float y = Random.Range(bounds.min.y, bounds.max.y);
+        float y = 10;
         float z = Random.Range(bounds.min.z, bounds.max.z);
 
         Vector3 randomPosition = new Vector3(x, y, z);
